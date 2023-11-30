@@ -3,6 +3,7 @@ package com.example.teamProject1.controller.api;
 import com.example.teamProject1.Dto.ResponseDto;
 import com.example.teamProject1.model.User;
 import com.example.teamProject1.service.UserService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ public class UserApiController {
     UserService userService;
 
     @PostMapping(value = "/auth/joinProc")
+    @JsonView(User.JsonViewWithoutPassword.class)
     public ResponseDto<Integer> save(@RequestBody User user) {
         System.out.println("UserApiController : save 호출됨");
         userService.joinUser(user);
