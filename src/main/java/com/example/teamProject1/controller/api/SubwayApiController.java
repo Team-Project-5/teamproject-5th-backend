@@ -2,7 +2,9 @@ package com.example.teamProject1.controller.api;
 
 import com.example.teamProject1.Dto.ResponseDto;
 import com.example.teamProject1.config.auth.PrincipalDetail;
+import com.example.teamProject1.model.User;
 import com.example.teamProject1.service.StationService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +20,7 @@ public class SubwayApiController {
 
     //경로 찾은 후 화면
     @GetMapping("/api/subway/search-way/{start}/{end}")
+    @JsonView(User.JsonViewWithoutPassword.class)
     public Map<String, Object> subway(@PathVariable String start, @PathVariable String end, @AuthenticationPrincipal PrincipalDetail principal) {
         int cost = stationService.shortestPath(start, end, "cost");
         int dist = stationService.shortestPath(start, end, "distance");
@@ -45,6 +48,7 @@ public class SubwayApiController {
 //    }
 
     @GetMapping("api/subway") //경로 찾기 전 화면
+    @JsonView(User.JsonViewWithoutPassword.class)
     public Map<String, Object> subwaySearch(@AuthenticationPrincipal PrincipalDetail principal) {
         Map<String, Object> map = new HashMap<>();
         map.put("stationAll", stationService.stationAll());
