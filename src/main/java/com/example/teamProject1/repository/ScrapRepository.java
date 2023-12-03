@@ -12,4 +12,6 @@ public interface ScrapRepository extends JpaRepository<Scrap, Integer> {
     void deleteByUserAndBoard(User user,Board board);
     void deleteByBoard(Board board);
     List<Scrap> findByUser(User user);
+
+    List<Scrap> findByUserId(int user);
 }

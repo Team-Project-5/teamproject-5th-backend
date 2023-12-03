@@ -321,7 +321,7 @@ public class BoardService {
         }
         boardRepository.save(findBoard);
     }
-//    //글 스크랩 테스트
+    //글 스크랩 테스트
 //    @Transactional
 //    public void scrapBoard(int id) {
 //
@@ -330,7 +330,7 @@ public class BoardService {
 //                    return new IllegalArgumentException("글 찾기 실패: 아이디를 찾을 수 없습니다.");
 //                });
 //
-//        User user = userRepository.findById(1)
+//        User user = userRepository.findById(9)
 //               .orElseThrow(() -> {
 //                    return new IllegalArgumentException("사용자 찾기 실패");
 //                });
@@ -352,7 +352,7 @@ public class BoardService {
     @Transactional
     public List<Board> scrapList(User user) {
         List<Board> boards=new ArrayList<>();
-        List<Scrap> scraps = scrapRepository.findByUser(user);
+        List<Scrap> scraps = scrapRepository.findByUserId(user.getId());
         for(Scrap scrap:scraps){
             boards.add(scrap.getBoard());
         }
